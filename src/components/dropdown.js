@@ -1,13 +1,19 @@
-import './App.css';
+import '../App.css';
+import React, { useState } from 'react';
 
-function Dropdown() {
+function Dropdown(props) {
+
+  const [setSelectionItems, selectionItems] = useState();  
+
+
   return (
     <div className="dropdown">
+        {props.title}
+
+
+
         <select>
-            <option value="grapefruit">Grapefruit</option>
-            <option value="lime">Lime</option>
-            <option selected value="coconut">Coconut</option>
-            <option value="mango">Mango</option>
+            <option value=""></option>
         </select>
     </div>
   );
