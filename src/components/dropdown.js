@@ -5,7 +5,6 @@ function Dropdown(props) {
 
   const [setSelectionItems, selectionItems] = useState();  
 
-
   return (
     <div className="dropdown">
         {props.title}
