@@ -4,7 +4,6 @@ import React from 'react';
 function Dropdown(props) {
     
     const onChange = (e) => {
-        console.log(e.target.value);
         props.passUserInput(e.target.value);
     }
 

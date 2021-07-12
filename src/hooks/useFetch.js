@@ -9,7 +9,7 @@ const useFetch = () => {
       
         const getFares = async () => {
             try {
-                const response = await fetch("../../fares.json");
+                const response = await fetch("fares.json");
                 const data = await response.json();
                 setData(data);
             } catch(err) {
