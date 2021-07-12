@@ -7,10 +7,10 @@ function RideQuantity(props) {
   }
 
   return (
-    <div className="rideQuantity" onChange={e => onNumberInput(e)}>
+    <div className="rideQuantity" >
         {props.title}
         <input type="number" id="rideQuantity" name="rideQuantity"
-        min="1" max="100"></input>
+        onChange={e => onNumberInput(e)}></input>
     </div>
   );
 }

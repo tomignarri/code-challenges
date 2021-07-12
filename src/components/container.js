@@ -22,36 +22,56 @@ function Container() {
         calculatedFare: 0
     });
 
+    const [zone, setZone] = useState("");
+    const [timeFrame, setTimeFrame] = useState("");
+    const [purchaseLocation, setPurchaseLocation] = useState("");
+    const [rideQuantity, setRideQuantity] = useState(0);
+    const [calculatedFare, setCalculatedFare] = useState(0);
+    
+
+    
 
     const zones = data.zones && data.zones.map(zone => zone.name);
 
     const zoneUpdate = (userZone) => {
-        setFareInformation({...fareInformation, zone: userZone});
-        console.log(fareInformation);
+        setZone(userZone);
+       
+        if(zone && timeFrame && purchaseLocation){
+            var fare = calculateFare(zone, timeFrame, purchaseLocation, rideQuantity, data.zones);
+            setCalculatedFare(fare);
+        }
     }
 
     const timeframeUpdate = (userTimeframe) => {
-        setFareInformation({...fareInformation, timeFrame: userTimeframe});
-        console.log(fareInformation);
+        setTimeFrame(userTimeframe);
+
+        if(zone && timeFrame && purchaseLocation){
+            var fare = calculateFare(zone, timeFrame, purchaseLocation, rideQuantity, data.zones);
+            setCalculatedFare(fare);
+        }
     }
 
     const purchaseLocationUpdate = (purchaseLocation) => {
-        setFareInformation({...fareInformation, purchaseLocation: purchaseLocation});
-        console.log(fareInformation);
+        
+        setPurchaseLocation(purchaseLocation);
+
+        if(zone && timeFrame && purchaseLocation){
+            var fare = calculateFare(zone, timeFrame, purchaseLocation, rideQuantity, data.zones);
+            setCalculatedFare(fare);
+        }
     }
 
     const rideQuantityUpdate = (rideQuantity) => {
-        setFareInformation({...fareInformation, rideQuantity: rideQuantity});
-        var fare = 0;
         
-        if(fareInformation.zone && fareInformation.timeFrame && fareInformation.purchaseLocation){
-            fare = calculateFare(fareInformation, data.zones);
+        setRideQuantity(rideQuantity);
+        console.log("quant ", rideQuantity);
+        if(zone && timeFrame && purchaseLocation){
+            var fare = calculateFare(zone, timeFrame, purchaseLocation, rideQuantity, data.zones);
+            setCalculatedFare(fare);
         }
-        
-        setFareInformation({...fareInformation, calculatedFare: fare});
     }
 
-    //useFareCalculation(fareInformation, data.zones);
+    
 
 
     return (
@@ -74,8 +94,8 @@ function Container() {
                 title="How many rides will you need?"
                 passUserInput={rideQuantityUpdate} />
             <CalculatedFare
-                userSelection={fareInformation}
-                fare={fareInformation.calculatedFare} />   
+                
+                fare={calculatedFare} />   
 
         </div>
     );
