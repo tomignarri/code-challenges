@@ -11,12 +11,16 @@ import useFareCalculation from '../hooks/useFareCalculation'
 //Hello!
 //
 // With more time, I would implement code to handle anytime advance purchase
-// I would change and lock the ticket quantity to 10 itmes
+// I would change and lock the ticket quantity to 10 tickets
 // I would add text to the ride quantity component and maybe a lock icon
 // so that they don't think the widget is broken. 
 // 
 // I would also add dynamic alerts for users who choose options that are not possible,
 // such as "onboard and anytime" tickets.
+// 
+//
+// In total I spent 6 or 7 hours on this project.
+
 
 
 
