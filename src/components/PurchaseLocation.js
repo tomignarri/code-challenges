@@ -12,9 +12,9 @@ function PurchaseLocation(props) {
     <div className="purchaseLocation" onChange={e => onSelection(e)}>
       {props.title}
       <input type="radio" id="stationkiosk" name="purchaseLocation" value="advance_purchase"></input>
-      Station Kiosk
+      <label htmlFor="stationkiosk">Station Kiosk</label>
       <input type="radio" id="onboard" name="purchaseLocation" value="onboard_purchase"></input>
-      Onboard
+      <label htmlFor="onboard">Onboard</label>
     </div>
     
   );

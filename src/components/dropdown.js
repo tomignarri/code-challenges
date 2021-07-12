@@ -10,9 +10,9 @@ function Dropdown(props) {
 
     return (
         <div className="dropdown">
-            {props.title}
-
-            <select onChange={e => onChange(e)}>
+            
+            <label htmlFor="selectDropdown">{props.title}</label>
+            <select onChange={e => onChange(e)} id="selectDropdown">
                 <option value={props.dropdownPreview}>{props.dropdownPreview}</option>
                 {props.dropdownOptions && props.dropdownOptions.map(option => 
                     <option value={option}>{option}</option>

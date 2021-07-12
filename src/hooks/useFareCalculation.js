@@ -11,12 +11,7 @@ const useFareCalculation = () => {
             timeFrame.type === userTimeFrame && 
             timeFrame.purchase === userPurchaseLocation);
             return timeFrame[0].price * userRideQuantity;
-   
-        
-        
     }
-    
-    
 
     return { calculateFare };
     

@@ -3,9 +3,24 @@ import Dropdown from './Dropdown';
 import useFetch from '../hooks/useFetch';
 import PurchaseLocation from '../components/PurchaseLocation';
 import RideQuantity from './RideQuantity';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import CalculatedFare from './CalculatedFare'
 import useFareCalculation from '../hooks/useFareCalculation'
+
+
+//Hello!
+//
+// With more time, I would implement code to handle anytime advance purchase
+// I would change and lock the ticket quantity to 10 itmes
+// I would add text to the ride quantity component and maybe a lock icon
+// so that they don't think the widget is broken. 
+
+
+
+
+
+
+
 
 
 function Container() {
@@ -14,14 +29,6 @@ function Container() {
     const { calculateFare } = useFareCalculation();
     
 
-    const [fareInformation, setFareInformation] = useState({
-        zone: "",
-        timeFrame: "",
-        purchaseLocation: "",
-        rideQuantity: 1,
-        calculatedFare: 0
-    });
-
     const [zone, setZone] = useState("");
     const [timeFrame, setTimeFrame] = useState("");
     const [purchaseLocation, setPurchaseLocation] = useState("");
@@ -29,47 +36,41 @@ function Container() {
     const [calculatedFare, setCalculatedFare] = useState(0);
     
 
-    
-
     const zones = data.zones && data.zones.map(zone => zone.name);
 
-    const zoneUpdate = (userZone) => {
-        setZone(userZone);
-       
+    useEffect(() => {
         if(zone && timeFrame && purchaseLocation){
+            console.log("calced");
             var fare = calculateFare(zone, timeFrame, purchaseLocation, rideQuantity, data.zones);
             setCalculatedFare(fare);
         }
+    }, [zone, timeFrame, purchaseLocation, rideQuantity, data.zones])
+    
+    const zoneUpdate = async (userZone) => {
+        
+        setZone(userZone);
+        
+
     }
 
     const timeframeUpdate = (userTimeframe) => {
+        
         setTimeFrame(userTimeframe);
-
-        if(zone && timeFrame && purchaseLocation){
-            var fare = calculateFare(zone, timeFrame, purchaseLocation, rideQuantity, data.zones);
-            setCalculatedFare(fare);
-        }
+       
     }
 
     const purchaseLocationUpdate = (purchaseLocation) => {
         
         setPurchaseLocation(purchaseLocation);
-
-        if(zone && timeFrame && purchaseLocation){
-            var fare = calculateFare(zone, timeFrame, purchaseLocation, rideQuantity, data.zones);
-            setCalculatedFare(fare);
-        }
+ 
     }
 
     const rideQuantityUpdate = (rideQuantity) => {
         
         setRideQuantity(rideQuantity);
-        console.log("quant ", rideQuantity);
-        if(zone && timeFrame && purchaseLocation){
-            var fare = calculateFare(zone, timeFrame, purchaseLocation, rideQuantity, data.zones);
-            setCalculatedFare(fare);
-        }
+        
     }
+    
 
     
 
@@ -94,9 +95,7 @@ function Container() {
                 title="How many rides will you need?"
                 passUserInput={rideQuantityUpdate} />
             <CalculatedFare
-                
                 fare={calculatedFare} />   
-
         </div>
     );
 }
