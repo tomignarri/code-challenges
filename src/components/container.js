@@ -8,7 +8,6 @@ import CalculatedFare from './CalculatedFare'
 import useFareCalculation from '../hooks/useFareCalculation'
 
 
-
 function Container() {
 
     const { data } = useFetch();
@@ -19,8 +18,10 @@ function Container() {
         zone: "",
         timeFrame: "",
         purchaseLocation: "",
-        rideQuantity: 1
+        rideQuantity: 1,
+        calculatedFare: 0
     });
+
 
     const zones = data.zones && data.zones.map(zone => zone.name);
 
@@ -41,9 +42,13 @@ function Container() {
 
     const rideQuantityUpdate = (rideQuantity) => {
         setFareInformation({...fareInformation, rideQuantity: rideQuantity});
-        console.log(fareInformation);
-        calculateFare(fareInformation, data.zones)
-
+        var fare = 0;
+        
+        if(fareInformation.zone && fareInformation.timeFrame && fareInformation.purchaseLocation){
+            fare = calculateFare(fareInformation, data.zones);
+        }
+        
+        setFareInformation({...fareInformation, calculatedFare: fare});
     }
 
     //useFareCalculation(fareInformation, data.zones);
@@ -69,7 +74,8 @@ function Container() {
                 title="How many rides will you need?"
                 passUserInput={rideQuantityUpdate} />
             <CalculatedFare
-            userSelection={fareInformation} />   
+                userSelection={fareInformation}
+                fare={fareInformation.calculatedFare} />   
 
         </div>
     );

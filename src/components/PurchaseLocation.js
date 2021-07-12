@@ -11,9 +11,9 @@ function PurchaseLocation(props) {
 
     <div className="purchaseLocation" onChange={e => onSelection(e)}>
       {props.title}
-      <input type="radio" id="stationkiosk" name="purchaseLocation" value="Station Kiosk"></input>
+      <input type="radio" id="stationkiosk" name="purchaseLocation" value="advance_purchase"></input>
       Station Kiosk
-      <input type="radio" id="onboard" name="purchaseLocation" value="Onboard"></input>
+      <input type="radio" id="onboard" name="purchaseLocation" value="onboard_purchase"></input>
       Onboard
     </div>
     
