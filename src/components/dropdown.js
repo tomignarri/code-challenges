@@ -1,21 +1,25 @@
 import '../App.css';
-import React, { useState } from 'react';
+import React from 'react';
 
 function Dropdown(props) {
+    
+    const onChange = (e) => {
+        console.log(e.target.value);
+        props.passUserInput(e.target.value);
+    }
 
-  const [setSelectionItems, selectionItems] = useState();  
+    return (
+        <div className="dropdown">
+            {props.title}
 
-  return (
-    <div className="dropdown">
-        {props.title}
-
-
-
-        <select>
-            <option value=""></option>
-        </select>
-    </div>
-  );
+            <select onChange={e => onChange(e)}>
+                <option value={props.dropdownPreview}>{props.dropdownPreview}</option>
+                {props.dropdownOptions && props.dropdownOptions.map(option => 
+                    <option value={option}>{option}</option>
+                )}
+            </select>
+        </div>
+    );
 }
 
 export default Dropdown;

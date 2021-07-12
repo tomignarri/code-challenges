@@ -2,13 +2,13 @@
 
 .container {
     border: 1px solid blue;
+    width: 300px;
 }
 
 .purchaseLocation {
     border-top: 1px solid blue;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     text-align: center;
     padding: 10px;
 }
@@ -17,11 +17,26 @@
     border-top: 1px solid blue;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     text-align: center;
     padding: 10px;
 }
 
 .header{
     height: 40px;
+}
+
+.rideQuantity {
+    border-top: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
+}
+
+.calculatedFare {
+    border-top: 1px solid blue;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    padding: 10px;
 }

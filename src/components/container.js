@@ -1,22 +1,76 @@
 import '../App.css';
-import Dropdown from './Dropdown'
-import useFetch from '../hooks/useFetch'
-import PurchaseLocation from '../components/PurchaseLocation'
+import Dropdown from './Dropdown';
+import useFetch from '../hooks/useFetch';
+import PurchaseLocation from '../components/PurchaseLocation';
+import RideQuantity from './RideQuantity';
+import React, { useState } from 'react';
+import CalculatedFare from './CalculatedFare'
+import useFareCalculation from '../hooks/useFareCalculation'
 
 
 
 function Container() {
 
-    const { getFares } = useFetch();
+    const { data } = useFetch();
+    const { calculateFare } = useFareCalculation();
+    
 
-    getFares();
+    const [fareInformation, setFareInformation] = useState({
+        zone: "",
+        timeFrame: "",
+        purchaseLocation: "",
+        rideQuantity: 1
+    });
+
+    const zones = data.zones && data.zones.map(zone => zone.name);
+
+    const zoneUpdate = (userZone) => {
+        setFareInformation({...fareInformation, zone: userZone});
+        console.log(fareInformation);
+    }
+
+    const timeframeUpdate = (userTimeframe) => {
+        setFareInformation({...fareInformation, timeFrame: userTimeframe});
+        console.log(fareInformation);
+    }
+
+    const purchaseLocationUpdate = (purchaseLocation) => {
+        setFareInformation({...fareInformation, purchaseLocation: purchaseLocation});
+        console.log(fareInformation);
+    }
+
+    const rideQuantityUpdate = (rideQuantity) => {
+        setFareInformation({...fareInformation, rideQuantity: rideQuantity});
+        console.log(fareInformation);
+        calculateFare(fareInformation, data.zones)
+
+    }
+
+    //useFareCalculation(fareInformation, data.zones);
+
 
     return (
         <div className="container">
             <div className="header"></div>
-            <Dropdown title="Where are you going?" dropdownOptions="" />
-            <Dropdown title="When are you riding?" dropdownOptions="" />
-            <PurchaseLocation title="Where will you purchase the fare?" />
+            <Dropdown 
+                title="Where are you going?" 
+                dropdownOptions={zones}
+                dropdownPreview="Select a zone"
+                passUserInput={zoneUpdate} />
+            <Dropdown 
+                title="When are you riding?" 
+                dropdownOptions={["weekday", "evening_weekend", "anytime"]} 
+                dropdownPreview="Select a timeframe"
+                passUserInput={timeframeUpdate} />
+            <PurchaseLocation 
+                title="Where will you purchase the fare?" 
+                passUserInput={purchaseLocationUpdate} />
+            <RideQuantity 
+                title="How many rides will you need?"
+                passUserInput={rideQuantityUpdate} />
+            <CalculatedFare
+            userSelection={fareInformation} />   
+
         </div>
     );
 }
